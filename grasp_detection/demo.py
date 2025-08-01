@@ -9,7 +9,7 @@ from gsnet import AnyGrasp
 from graspnetAPI import GraspGroup
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--checkpoint_path', required=True, help='Model checkpoint path')
+parser.add_argument('--checkpoint_path', default='log/checkpoint_detection.tar', help='Model checkpoint path')
 parser.add_argument('--max_gripper_width', type=float, default=0.1, help='Maximum gripper width (<=0.1m)')
 parser.add_argument('--gripper_height', type=float, default=0.03, help='Gripper height')
 parser.add_argument('--top_down_grasp', action='store_true', help='Output top-down grasps.')
@@ -28,10 +28,15 @@ def demo(data_dir):
     fx, fy = 927.17, 927.37
     cx, cy = 651.32, 349.62
     scale = 1000.0
+    
     # set workspace to filter output grasps
     xmin, xmax = -0.19, 0.12
     ymin, ymax = 0.02, 0.15
     zmin, zmax = 0.0, 1.0
+    
+    # xmin, xmax = -0.5, 0.5
+    # ymin, ymax = -0.5, 0.5
+    # zmin, zmax = 0.0, 1.0
     lims = [xmin, xmax, ymin, ymax, zmin, zmax]
 
     # get point cloud
@@ -47,9 +52,11 @@ def demo(data_dir):
     points = points[mask].astype(np.float32)
     colors = colors[mask].astype(np.float32)
     print(points.min(axis=0), points.max(axis=0))
-
-    gg, cloud = anygrasp.get_grasp(points, colors, lims=lims, apply_object_mask=True, dense_grasp=False, collision_detection=True)
-
+    
+    # print(points.shape, colors.shape)
+    gg, cloud = anygrasp.get_grasp(points, colors, lims=lims, apply_object_mask=True, dense_grasp=True, collision_detection=True)
+    # print(gg)
+    
     if len(gg) == 0:
         print('No Grasp detected after collision detection!')
 
@@ -59,14 +66,22 @@ def demo(data_dir):
     print('grasp score:', gg_pick[0].score)
 
     # visualization
-    if cfgs.debug:
-        trans_mat = np.array([[1,0,0,0],[0,1,0,0],[0,0,-1,0],[0,0,0,1]])
-        cloud.transform(trans_mat)
-        grippers = gg.to_open3d_geometry_list()
-        for gripper in grippers:
-            gripper.transform(trans_mat)
-        o3d.visualization.draw_geometries([*grippers, cloud])
-        o3d.visualization.draw_geometries([grippers[0], cloud])
+    # if cfgs.debug:
+    #     trans_mat = np.array([[1,0,0,0],[0,1,0,0],[0,0,-1,0],[0,0,0,1]])
+    #     cloud.transform(trans_mat)
+    #     grippers = gg.to_open3d_geometry_list()
+    #     grippers_pcd = []
+    #     for gripper in grippers:
+    #         gripper.transform(trans_mat)
+    #         grippers_pcd.append(gripper.sample_points_uniformly(number_of_points=200))
+    #     o3d.visualization.draw_geometries([*grippers, cloud])
+    #     o3d.visualization.draw_geometries([grippers[0], cloud])
+
+    #     scene_vis = cloud
+    #     for gripper_pcd in grippers_pcd:
+    #         scene_vis = scene_vis + gripper_pcd
+    #     # scene_vis = inst_vis + proj_scene + axis_pcd
+    #     o3d.io.write_point_cloud('vis.ply', scene_vis)
 
 
 if __name__ == '__main__':

@@ -6,3 +6,6 @@
 .DS_Store
 .TimeRecord
 license
+**/experiment/**
+vis
+log

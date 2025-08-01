@@ -1,0 +1,12 @@
+# ninja log v5
+2	32459	1733561942255545870	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/group_points.o	87dbc16ae837e4a2
+0	32478	1733561942247545977	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/ball_query.o	b6e61c5edb686521
+1	32479	1733561952539406915	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/ball_query_gpu.o	736c987f3a261b0
+1	32488	1733561942255545870	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/bindings.o	1662ccb567fdaa75
+1	32498	1733561943219532861	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/cylinder_query.o	2e437e5f235547c
+2	32498	1733561943119534211	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/cylinder_query_gpu.o	cf2f843f2ce66efe
+3	32498	1733561952543406861	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/interpolate_gpu.o	dd7f17cea2b2df3
+3	32508	1733561943211532969	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/sampling.o	4a6fe921a2bc44cb
+2	32595	1733561952675405075	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/interpolate.o	b805663651a433a0
+2	39500	1733561952543406861	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/group_points_gpu.o	6dd024868fb4a94d
+3	39501	1733561952591406211	/home/smartgrasping/rcao/anygrasp_sdk/pointnet2/build/temp.linux-x86_64-cpython-310/pointnet2/_ext_src/src/sampling_gpu.o	49064cf461ac783e

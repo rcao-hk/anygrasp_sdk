@@ -1,0 +1,2 @@
+CUDA_VISIBLE_DEVICES=4 python infer.py --split test_novel --dump_dir 'experiment/anygrasp' --camera 'realsense' --collision_thresh 0.01 --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'
+python eval.py --split test_novel --camera 'realsense' --dump_dir 'experiment/anygrasp' --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'  --num_workers 12

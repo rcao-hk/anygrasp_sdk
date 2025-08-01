@@ -1,0 +1,8 @@
+CUDA_VISIBLE_DEVICES=1 python infer_noise.py --split test_seen --dump_dir 'experiment/anygrasp' --camera 'realsense' --collision_thresh 0.01 --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'
+# python eval.py --split test_seen --camera 'realsense' --dump_dir 'experiment/anygrasp' --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'  --num_workers 12
+# CUDA_VISIBLE_DEVICES=1 python infer_noise.py --split test_seen --dump_dir 'experiment/anygrasp.s5' --camera 'realsense' --collision_thresh 0.01 --dataset_root '/media/gpuadmin/rcao/dataset/graspnet' --smooth_size 5 --remove_outliers
+# python eval.py --split test_seen --camera 'realsense' --dump_dir 'experiment/anygrasp.s5' --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'  --num_workers 12
+# CUDA_VISIBLE_DEVICES=1 python infer_noise.py --split test_seen --dump_dir 'experiment/anygrasp.s15' --camera 'realsense' --collision_thresh 0.01 --dataset_root '/media/gpuadmin/rcao/dataset/graspnet' --smooth_size 15 --remove_outliers
+# python eval.py --split test_seen --camera 'realsense' --dump_dir 'experiment/anygrasp.s15' --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'  --num_workers 12
+# CUDA_VISIBLE_DEVICES=1 python infer_noise.py --split test_seen --dump_dir 'experiment/anygrasp.s29' --camera 'realsense' --collision_thresh 0.01 --dataset_root '/media/gpuadmin/rcao/dataset/graspnet' --smooth_size 29 --remove_outliers
+# python eval.py --split test_seen --camera 'realsense' --dump_dir 'experiment/anygrasp.s29' --dataset_root '/media/gpuadmin/rcao/dataset/graspnet'  --num_workers 12
