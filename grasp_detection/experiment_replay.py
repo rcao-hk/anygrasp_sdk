@@ -6,11 +6,12 @@ import pandas as pd
 # epoch_list = ['40', '45', '50', '55', '60']
 # model_list = [method + '_' + i for i in epoch_list]
 # model_list = [method]
-experiment_root = '/media/2TB/result/grasp/cd'
+experiment_root = '/media/2TB/result/grasp/graspnet_trans_full/15000'
 # experiment_root = '/media/gpuadmin/rcao/result/ignet/experiment'
 
-# model_list = ['anygrasp_gt', 'anygrasp_raw', 'anygrasp_ours_restored', 'anygrasp_ours_restored_conf', 'anygrasp_d3roma_rgbd', 'anygrasp_d3roma_stereo']
-model_list = ['anygrasp_ours_l1_grad_restored', 'anygrasp_ours_l1_grad_restored_conf_0.1', 'anygrasp_ours_l1_grad_restored_conf_0.3', 'anygrasp_ours_l1_grad_restored_conf_0.5', 'anygrasp_ours_l1_grad_restored_conf_0.7', 'anygrasp_ours_l1_grad_restored_conf_0.9']
+model_list = ['anygrasp_gt', 'anygrasp_raw', 'anygrasp_ours_l1_grad_restored', 'anygrasp_ours_l1_grad_restored_conf', 'anygrasp_ours_l1_grad_restored_conf_0.3', 'anygrasp_drnet', 'anygrasp_d3roma_rgbd', 'anygrasp_d3roma_stereo']
+# model_list = ['anygrasp_ours_l1_grad_restored', 'anygrasp_ours_l1_grad_restored_conf_0.1', 'anygrasp_ours_l1_grad_restored_conf_0.3', 'anygrasp_ours_l1_grad_restored_conf_0.5', 'anygrasp_ours_l1_grad_restored_conf_0.7', 'anygrasp_ours_l1_grad_restored_conf_0.9']
+
 topk = 1
 
 column = ['AP', 'AP0.8', 'AP0.4', 'AP', 'AP0.8', 'AP0.4', 'AP', 'AP0.8', 'AP0.4', 'AP_mean']

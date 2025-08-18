@@ -13,6 +13,7 @@ import MinkowskiEngine as ME
 
 from graspnetAPI import GraspGroup
 from gsnet import AnyGrasp
+from tqdm import tqdm
 
 from graspnetAPI.utils.utils import create_point_cloud_from_depth_image, CameraInfo
 
@@ -169,7 +170,7 @@ anygrasp = AnyGrasp(cfgs)
 anygrasp.load_net()
 
 def inference(scene_idx):
-    for anno_idx in range(0, 256, int(1/cfgs.anno_sample_ratio)):
+    for anno_idx in tqdm(range(0, 256, int(1/cfgs.anno_sample_ratio))):
         rgb_path = os.path.join(sim_dataset_root, '{:05d}/{:04d}_color.png'.format(scene_idx, anno_idx))
         if cfgs.depth_type == 'gt':
             depth_path = os.path.join(dataset_root, 'virtual_scenes/scene_{:04d}/{}/{:04d}_depth.png'.format(scene_idx, camera, anno_idx))
@@ -271,7 +272,7 @@ def inference(scene_idx):
         # save grasps
         save_path = os.path.join(save_dir, '%04d'%anno_idx+'.npy')
         gg.save_npy(save_path)
-        print('Saving {}, {}'.format(scene_idx, anno_idx))
+        # print('Saving {}, {}'.format(scene_idx, anno_idx))
 
 
 scene_list = []
