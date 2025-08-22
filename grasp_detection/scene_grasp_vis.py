@@ -55,18 +55,19 @@ raw_dataset_root = '/media/2TB/dataset/graspnet'
 vis_root = os.path.join('vis', 'grasp_vis')
 os.makedirs(vis_root, exist_ok=True)
 
-restored_depth_root = '/media/2TB/result/depth/graspnet_trans_full/dreds_dav2_complete_obs_iter_unc_cali_convgru_l1_only_0.5_l1+grad_sigma_conf_320x180'
+restored_depth_root = '/media/2TB/result/depth/graspnet_trans_full/dreds_dav2_complete_obs_iter_unc_cali_convgru_l1_only_0.5_l1+grad_sigma_conf_320x180/vitl'
 camera_type = 'realsense'
 
 grasp_data_root = '/media/2TB/result/grasp/graspnet_trans_full/15000'
-method1 = 'anygrasp_ours_l1_grad_restored'
-method2 = 'anygrasp_ours_l1_grad_restored_conf'
+method1 = 'gsnet_virtual_ours_restored'
+method2 = 'gsnet_virtual_ours_restored_conf_0.5'
 
 width = 1280
 height = 720
 sample_ratio = 1
 conf_thres = 0.5
 sample_num = 15000
+scene_list = range(102, 103)
 
 import pickle
 from graspnetAPI.utils.config import get_config
@@ -99,7 +100,7 @@ def uncertainty_guided_sampling_multimodal(uncertainty_map, sample_num, low_conf
     uncertainty_map = torch.tensor(uncertainty_map, dtype=torch.float32)
     
     # 归一化不确定性图（值在0和1之间）
-    uncertainty_map = uncertainty_map - uncertainty_map.min() / (uncertainty_map.max() - uncertainty_map.min())
+    uncertainty_map = (uncertainty_map - uncertainty_map.min()) / (uncertainty_map.max() - uncertainty_map.min())
     
     # 通过不确定性图生成概率分布
     prob_distribution = 1 - uncertainty_map.flatten()
@@ -307,10 +308,10 @@ def get_vis_colormap(depth, mask, min_value=0.0, max_value=2.0, colormap='viridi
     colormap[~mask] = [0, 0, 0]  # Set invalid pixels to black
     return colormap
 
-scene_list = range(103, 104)
+
 
 for scene_idx in tqdm(scene_list):
-    for anno_idx in range(77, 78, int(1/sample_ratio)):
+    for anno_idx in range(108, 109, int(1/sample_ratio)):
 
         rgb_path = os.path.join(dataset_root,
                                 '{:05d}/{:04d}_color.png'.format(scene_idx, anno_idx))
@@ -350,13 +351,13 @@ for scene_idx in tqdm(scene_list):
         workspace_mask = get_workspace_mask(cloud, seg, trans=trans, organized=True, outlier=0.02)
         mask = (depth_mask & workspace_mask)
 
-        cv2.imwrite(os.path.join(vis_root, f'scene_{scene_idx:04d}_anno_{anno_idx:03d}_color.png'), (color[:, :,::-1] * 255).astype(np.uint8))
+        cv2.imwrite(os.path.join(vis_root, f'scene_{scene_idx:04d}_anno_{anno_idx:04d}_color.png'), (color[:, :,::-1] * 255).astype(np.uint8))
         # restored_depth_conf_norm = (restored_depth_conf - restored_depth_conf.min()) / (restored_depth_conf.max() - restored_depth_conf.min())
         vaild_mask = (restored_depth > 0)
         restored_depth_conf = np.clip(restored_depth_conf, 0.0, 1.0)
         restored_depth_conf_colormap = get_vis_colormap(restored_depth_conf, vaild_mask, 0.0, 1.0, colormap='viridis')
         
-        cv2.imwrite(os.path.join(vis_root, f'scene_{scene_idx:04d}_anno_{anno_idx:03d}_conf.png'), (restored_depth_conf_colormap).astype(np.uint8))
+        cv2.imwrite(os.path.join(vis_root, f'scene_{scene_idx:04d}_anno_{anno_idx:04d}_conf.png'), (restored_depth_conf_colormap).astype(np.uint8))
         
         
         cloud_masked = cloud[mask]

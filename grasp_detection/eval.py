@@ -27,7 +27,7 @@ def evaluate():
         res, ap = ge.eval_similar(os.path.join(cfgs.dump_dir), anno_sample_ratio=cfgs.anno_sample_ratio, proc=cfgs.num_workers)
     else:
         res, ap = ge.eval_novel(os.path.join(cfgs.dump_dir), anno_sample_ratio=cfgs.anno_sample_ratio, proc=cfgs.num_workers)
-    save_dir = os.path.join(cfgs.dump_dir, 'ap_{}_{}.npy'.format(cfgs.split, cfgs.camera))
+    save_dir = os.path.join(cfgs.dump_dir, 'ap_{}_{}_cf.npy'.format(cfgs.split, cfgs.camera))
     np.save(save_dir, res)
 
 if __name__=='__main__':

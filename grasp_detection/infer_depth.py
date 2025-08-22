@@ -95,7 +95,7 @@ def uncertainty_guided_sampling_multimodal(uncertainty_map, sample_num, low_conf
     uncertainty_map = torch.tensor(uncertainty_map, dtype=torch.float32)
     
     # 归一化不确定性图（值在0和1之间）
-    uncertainty_map = uncertainty_map - uncertainty_map.min() / (uncertainty_map.max() - uncertainty_map.min())
+    uncertainty_map = (uncertainty_map - uncertainty_map.min()) / (uncertainty_map.max() - uncertainty_map.min())
     
     # 通过不确定性图生成概率分布
     prob_distribution = 1 - uncertainty_map.flatten()
@@ -181,7 +181,11 @@ def inference(scene_idx):
         elif cfgs.depth_type == 'restored_conf':
             depth_path = os.path.join(cfgs.depth_result_root, '{:05d}/{:06d}_depth.png'.format(scene_idx, anno_idx))
             conf_path = os.path.join(cfgs.depth_result_root, '{:05d}/{:06d}_conf.npy'.format(scene_idx, anno_idx))
-            conf_map = np.load(conf_path)
+            conf_path = conf_path if os.path.exists(conf_path) else conf_path.replace('_conf.npy', '_conf.npz')
+            if conf_path.endswith('.npz'):
+                conf_map = np.load(conf_path)['conf']
+            else:
+                conf_map = np.load(conf_path)
         mask_path = os.path.join(dataset_root, 'scenes/scene_{:04d}/{}/label/{:04d}.png'.format(scene_idx, camera, anno_idx))
         meta_path = os.path.join(dataset_root, 'scenes/scene_{:04d}/{}/meta/{:04d}.mat'.format(scene_idx, camera, anno_idx))
 

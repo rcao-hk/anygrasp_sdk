@@ -254,8 +254,10 @@ def plot_anno_ap_for_scene(experiment_root, method1, method2, split, camera_type
 # ===== 使用示例 =====
 if __name__ == "__main__":
     experiment_root = "/media/2TB/result/grasp/graspnet_trans_full/15000"
-    method1 = "anygrasp_ours_l1_grad_restored" 
-    method2 = "anygrasp_ours_l1_grad_restored_conf_0.3"
+    method1 = "gsnet_virtual_ours_restored" 
+    method2 = "gsnet_virtual_ours_restored_conf_0.5"
+    # method1 = "gsnet_virtual_ours_restored_conf_0.5"
+    # method2 = "gsnet_virtual_ours_restored"
     split = "seen"
     camera_type = "realsense"
     topk = 50
